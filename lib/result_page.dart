@@ -27,13 +27,30 @@ class _ResultPageState extends State<ResultPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("RESULT")),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.name),
-          Text(widget.email),
-          Text(widget.phone),
-          Text(widget.age),
-          Text(widget.gender)
+          Form(
+              child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text(
+                    "Name:  ",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    widget.name,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+              Text("Email: " + widget.email),
+              Text("Mobile: ${widget.phone}"),
+              Text("Age: " + widget.age),
+              Text("Gender: " + widget.gender),
+            ],
+          ))
         ],
       ),
     );

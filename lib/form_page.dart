@@ -1,3 +1,4 @@
+import 'package:exerciseform1/result_page.dart';
 import 'package:flutter/material.dart';
 
 class FormPage extends StatefulWidget {
@@ -8,15 +9,23 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-  final String name = "";
-  final String email = "";
-  final String phoneNumber = "";
-  final String age = "";
-  final String gender = "";
+  String name = "";
+  String email = "";
+  String phoneNumber = "";
+  String age = "";
+  String gender = "";
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final ageController = TextEditingController();
+  final genderController = TextEditingController();
+
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   Widget _buildName() {
     return TextFormField(
+      controller: nameController,
       decoration: const InputDecoration(labelText: "Name :"),
       validator: (name) {
         if (name == null || name.isEmpty) {
@@ -34,6 +43,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildEmail() {
     return TextFormField(
+      controller: emailController,
       decoration: const InputDecoration(labelText: "E-mail :"),
       validator: (email) {
         if (email == null || email.isEmpty) {
@@ -52,6 +62,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
+      controller: phoneController,
       decoration: const InputDecoration(labelText: "Phone Number :"),
       validator: (phone) {
         if (phone == null || phone.isEmpty) {
@@ -68,6 +79,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildAge() {
     return TextFormField(
+      controller: ageController,
       decoration: const InputDecoration(labelText: "Age :"),
       validator: (age) {
         if (age == null || age.isEmpty) {
@@ -84,6 +96,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildGender() {
     return TextFormField(
+      controller: genderController,
       decoration: const InputDecoration(labelText: "Gender :"),
       validator: (sex) {
         if (sex == null || sex.isEmpty) {
@@ -126,7 +139,20 @@ class _FormPageState extends State<FormPage> {
                     onPressed: () => {
                           if (_formkey.currentState!.validate())
                             {
-                              Navigator.pushNamed(context, "/second")
+                              name = nameController.text,
+                              email = emailController.text,
+                              phoneNumber = phoneController.text,
+                              age = ageController.text,
+                              gender = genderController.text,
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ResultPage(
+                                          name: name,
+                                          email: email,
+                                          phone: phoneNumber,
+                                          age: age,
+                                          gender: gender))),
                               /* ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text(" Processing Data")
